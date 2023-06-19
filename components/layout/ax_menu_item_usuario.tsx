@@ -34,10 +34,10 @@ const navigation_usuario = [
             {    name: 'Solicitud' , href: '/documento/solicitud', icon: DocumentSearchIcon, current: false },
         ],
     },
-    {
-        name: 'Reporte', href: 'https://datastudio.google.com/reporting/1fd75105-1bfd-4a80-bcaa-24c24cbd87f5', icon: DocumentReportIcon, current: false,
+    // {
+    //     name: 'Reporte', href: 'https://datastudio.google.com/reporting/1fd75105-1bfd-4a80-bcaa-24c24cbd87f5', icon: DocumentReportIcon, current: false,
        
-    },
+    // },
 ]
 
 
