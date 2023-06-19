@@ -1,0 +1,19 @@
+RESPONSIVO
+-TIPO DOCUMENTO
+
+Arregalar el titulo de la edicion (TERMINADO)
+quitar el boton de ver archivo (TERMINADO)
+agregar filtro estado (TERMINADO)
+cambiar el link cuando este seleccionado (TERMINADO)
+tamaño del Grid (TERMINADO)
+agregar todos los estados en la edicion de solicitud (combo) (TERMINADO)
+poner columna archivo solo un icono y bajar el Tamaño (TERMINADO)
+EL item subir archivo solo se debe mostrar en validado (TERMINADO)
+cuando el estado este finalizado se deberia poder solo ver el archivo (TERMINADO)
+en estado rechazado no debe aparecer el archivo (TERMINADO)
+agregar consideraciones y requisitos en la solicitud (TERMINADO)
+agregar columna dias a vencer (TERMINADO)
+en la solicitud el numero seria este (SOL-ACTNAC-2022-00001) (TERMINADO)
+cambiar al swr (TERMINADO)
+cambiar y poner los nombres de las paginas
+

@@ -1,0 +1,221 @@
+SELECT
+  D.nombre
+FROM anexo A
+JOIN distrito D
+ON A.id_distrito = D.id
+
+
+
+
+
+
+
+interface Anexo {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nombre: any // type unknown;
+  descripcion?: any // type unknown;
+};
+
+interface Rol {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nombre: any // type unknown;
+  descripcion?: any // type unknown;
+};
+
+interface Distrito {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nombre: any // type unknown;
+  descripcion?: any // type unknown;
+  id_anexo: number   /* foreign key to anexo.id */;
+  anexo?: Anexo;
+};
+
+interface Tipo_documento {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nombre: any // type unknown;
+  descripcion: any // type unknown;
+};
+
+interface Area {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nombre: any // type unknown;
+  descripcion?: any // type unknown;
+};
+
+interface Consideracion {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nombre: any // type unknown;
+  descripcion: any // type unknown;
+};
+
+interface Requisito {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nombre: any // type unknown;
+  descripcion: any // type unknown;
+  url_imagen?: any // type unknown;
+};
+
+interface Ciudadano {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nombre: any // type unknown;
+  apellido: any // type unknown;
+  numero_documento: any // type unknown;
+  fecha_nacimiento: string;
+  direccion: any // type unknown;
+  celular: any // type unknown;
+  email: any // type unknown;
+  tipo_persona: any // type unknown;
+  estado?: any // type unknown;
+  id_distrito: number   /* foreign key to distrito.id */;
+  distrito?: Distrito;
+};
+
+interface Grupo {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nombre: any // type unknown;
+  descripcion?: any // type unknown;
+};
+
+interface Documento {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  codigo: any // type unknown;
+  nombre: any // type unknown;
+  descripcion?: any // type unknown;
+  tiempo_entrega?: any // type unknown;
+  costo?: any // type unknown;
+  id_grupo?: number   /* foreign key to grupo.id */;
+  id_tipo_documento?: number   /* foreign key to tipo_documento.id */;
+  grupo?: Grupo;
+  tipo_documento?: Tipo_documento;
+};
+
+interface Consideracion_documento {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  id_documento: number   /* foreign key to documento.id */;
+  id_consideracion: number   /* foreign key to consideracion.id */;
+  documento?: Documento;
+  consideracion?: Consideracion;
+};
+
+interface Documento_requisito {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  id_documento: number   /* foreign key to documento.id */;
+  id_requisito: number   /* foreign key to requisito.id */;
+  documento?: Documento;
+  requisito?: Requisito;
+};
+
+interface Empleado {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nombre: any // type unknown;
+  apellido: any // type unknown;
+  numero_documento: any // type unknown;
+  fecha_nacimiento: string;
+  direccion: any // type unknown;
+  celular: any // type unknown;
+  email: any // type unknown;
+  sexo: any // type unknown;
+  tipo_contrato: any // type unknown;
+  estado?: any // type unknown;
+  id_distrito: number   /* foreign key to distrito.id */;
+  id_area: number   /* foreign key to area.id */;
+  id_rol: number   /* foreign key to rol.id */;
+  distrito?: Distrito;
+  area?: Area;
+  rol?: Rol;
+};
+
+interface Registro_documento {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  nro_documento: any // type unknown;
+  observaciones: any // type unknown;
+  url_archivo: any // type unknown;
+  fecha_documento: string;
+  fecha_anulacion?: string;
+  motivo?: any // type unknown;
+  es_anulado: any // type unknown;
+  id_empleado: number   /* foreign key to empleado.id */;
+  id_ciudadano: number   /* foreign key to ciudadano.id */;
+  id_documento: number   /* foreign key to documento.id */;
+  empleado?: Empleado;
+  ciudadano?: Ciudadano;
+  documento?: Documento;
+};
+
+interface Solicitud {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  asunto: any // type unknown;
+  nro_documento: any // type unknown;
+  fecha_inicio: any // type unknown;
+  fecha_plazo?: string;
+  motivo?: any // type unknown;
+  id_area: number   /* foreign key to area.id */;
+  id_ciudadano: number   /* foreign key to ciudadano.id */;
+  id_empleado: number   /* foreign key to empleado.id */;
+  id_documento: number   /* foreign key to documento.id */;
+  area?: Area;
+  ciudadano?: Ciudadano;
+  empleado?: Empleado;
+  documento?: Documento;
+};
+
+interface Seguimiento_detalle {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  estado: any // type unknown;
+  observaciones: any // type unknown;
+  fecha_registro: string;
+  fecha: string;
+  id_area: number   /* foreign key to area.id */;
+  id_solicitud: number   /* foreign key to solicitud.id */;
+  id_empleado: number   /* foreign key to empleado.id */;
+  area?: Area;
+  solicitud?: Solicitud;
+  empleado?: Empleado;
+};
+
+interface Seguimiento {
+  id: number   /* primary key */;
+  fecha_creacion: string;
+  fecha_edicion: string;
+  fecha_solicitud: string;
+  estado: any // type unknown;
+  id_tipo_documento: number   /* foreign key to tipo_documento.id */;
+  id_solicitud: number   /* foreign key to solicitud.id */;
+  id_ciudadano: number   /* foreign key to ciudadano.id */;
+  tipo_documento?: Tipo_documento;
+  solicitud?: Solicitud;
+  ciudadano?: Ciudadano;
+};
+

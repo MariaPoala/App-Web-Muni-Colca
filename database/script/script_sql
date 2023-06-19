@@ -1,0 +1,186 @@
+script 
+create table anexo (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nombre character not null,
+  descripcion character
+);
+
+create table rol (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nombre character not null,
+  descripcion character
+);
+
+create table distrito (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nombre character not null,
+  descripcion character,
+  id_anexo bigint references anexo (id)
+);
+
+create table tipo_documento (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nombre character not null,
+  descripcion character not null
+);
+
+create table area (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nombre character not null,
+  descripcion character
+);
+
+create table consideracion (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nombre character not null,
+  descripcion character not null
+);
+
+create table requisito (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nombre character not null,
+  descripcion character not null,
+  url_imagen character
+);
+
+create table ciudadano (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nombre character not null,
+  apellido character not null,
+  numero_documento character not null,
+  fecha_nacimiento timestamp default now() not null,
+  direccion character not null,
+  celular character not null,
+  email character not null,
+  tipo_persona character not null,
+  estado bit,
+  id_distrito bigint references distrito (id)
+);
+
+create table grupo (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nombre character not null,
+  descripcion character
+);
+
+create table documento (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  codigo character not null,
+  nombre character not null,
+  descripcion character,
+  tiempo_entrega integer,
+  costo numeric,
+  id_grupo bigint references grupo (id),
+  id_tipo_documento bigint references tipo_documento (id)
+);
+
+create table consideracion_documento (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  id_documento bigint references documento (id),
+  id_consideracion bigint references consideracion (id)
+);
+
+create table documento_requisito (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  id_documento bigint references documento (id),
+  id_requisito bigint references requisito (id)
+);
+
+create table empleado (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nombre character not null,
+  apellido character not null,
+  numero_documento character not null,
+  fecha_nacimiento timestamp default now() not null,
+  direccion character not null,
+  celular character not null,
+  email character not null,
+  sexo character not null,
+  tipo_contrato character not null,
+  estado bit,
+  id_distrito bigint references distrito (id),
+  id_area bigint references area (id),
+  id_rol bigint references rol (id)
+);
+
+create table registro_documento (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  nro_documento character not null,
+  observaciones character not null,
+  url_archivo character not null,
+  fecha_documento timestamp default now() not null,
+  fecha_anulacion timestamp default now(),
+  motivo character,
+  es_anulado bit not null,
+  id_empleado bigint references empleado (id),
+  id_ciudadano bigint references ciudadano (id),
+  id_documento bigint references documento (id)
+);
+
+create table solicitud (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  asunto character not null,
+  nro_documento character not null,
+  fecha_inicio character not null,
+  fecha_plazo timestamp default now(),
+  motivo character,
+  id_area bigint references area (id),
+  id_ciudadano bigint references ciudadano (id),
+  id_empleado bigint references empleado (id),
+  id_documento bigint references documento (id)
+);
+
+create table seguimiento_detalle (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  estado character not null,
+  observaciones character not null,
+  fecha_registro timestamp default now() not null,
+  fecha timestamp default now() not null,
+  id_area bigint references area (id),
+  id_solicitud bigint references solicitud (id),
+  id_empleado bigint references empleado (id)
+);
+
+create table seguimiento (
+  id bigint not null primary key,
+  fecha_creacion timestamp default now() not null,
+  fecha_edicion timestamp default now() not null,
+  fecha_solicitud timestamp default now() not null,
+  estado character not null,
+  id_tipo_documento bigint references tipo_documento (id),
+  id_solicitud bigint references solicitud (id),
+  id_ciudadano bigint references ciudadano (id)
+);
+

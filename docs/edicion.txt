@@ -1,0 +1,7 @@
+-agregar (0)
+-eliminar (-1)
+-editar (id del doc que se edita)
+
+los nombres de los campos va con minusculas y separado por subgion
+los nombres de los archivos va con minusculas y separado por subgion
+las funciones a exportar por defecto var con mayusculas al principio y al separar palabras
